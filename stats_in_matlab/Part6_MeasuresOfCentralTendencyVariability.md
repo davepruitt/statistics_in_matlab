@@ -281,25 +281,18 @@ x_std_err =
 
 I use the following function to calculate the 95% confidence interval:
 
-`function ci = simple_ci (X, alpha)`
-
-`    if (nargin < 2)`
-
-`        alpha = 0.05;`
-
-`    end`
-
-`    if (nargin < 1)`
-
-`        error('simple_ci requires single column data input.');`
-
-`    end`
-
-`    [h, p, ci] = ttest(X, 0, alpha);`
-
-`    ci = nanmean(X, 1) - ci(1, :);`
-
-`end`
+```matlab:Code
+function ci = simple_ci (X, alpha)
+if (nargin < 2)
+    alpha = 0.05;
+end
+if (nargin < 1)
+    error('simple_ci requires single column data input.');
+end
+[h, p, ci] = ttest(X, 0, alpha);
+ci = nanmean(X, 1) - ci(1, :);
+end
+```
 
 Example of usage:
 
