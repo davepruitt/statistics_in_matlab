@@ -16,6 +16,11 @@ Hopefully this can be helpful to anyone who is trying to perform statistics with
 - [Part 2: All kinds of ANOVAs in Matlab](stats_in_matlab/Part2_ANOVA.md)
 - [Part 3: Testing for normality in Matlab](stats_in_matlab/Part3_TestsForNormality.md)
 - [Part 4: Non-parametrics tests in Matlab](stats_in_matlab/Part4_NonParametricTests.md)
+- [Part 5: Chi-Squared, correlation, and linear regression in Matlab](stats_in_matlab/Part5_ChiSquareCorrelationRegression.md)
+- [Part 6: Measures of central tendency and variability in Matlab](stats_in_matlab/Part6_MeasuresOfCentralTendencyVariability.md)
+- Part 7: Calculating effect sizes (TO DO)
+- Part 8: Performing *a priori* power analysis (TO DO)
+- Part 9: Other useful functions (TO DO)
 
 
 
