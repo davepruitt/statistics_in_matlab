@@ -19,12 +19,11 @@ Examples of when to use an ANOVA:
 
 Matlab has a *lot* of ANOVA functions. Some of the most common that you will see/use are:
 
-   -  `anova` 
    -  `anova1` 
    -  `anova2` 
    -  `anovan` 
-   -  `ranova` 
-   -  `manova` 
+   -  `fitlm `or  `fitrm` in combination with `anova `and `ranova` 
+   -  `manova `(not covered here) 
 
 Each of these functions works differently. Because of this, it can be confusing which one to use and how to use it. So let's go over them and see how to use them.
 
@@ -367,6 +366,50 @@ tbl
 You will notice that we get the exact same result as we did with `anova1`. But using this function allows us more flexibility just in case we don't have the same number of subjects in each group.
 
   
+## 2.8.1 Performing a one-way ANOVA using `fitlm` and `anova`
+  
+
+`There is `*`yet another way`*` to do an ANOVA in Matlab, and that is to use a combination of the fitlm` and `anova` functions. The `fitlm` functions fits a linear model to your data, and you can use the `anova` function to run your anova statistics. Here is an example:
+
+```matlab:Code
+t = table(categorical(groups), map_data, 'variablenames', {'Group', 'Data'});
+lm = fitlm(t, 'Data ~ Group')
+```
+
+```text:Output
+lm = 
+Linear regression model:
+    Data ~ 1 + Group
+
+Estimated Coefficients:
+                        Estimate                SE                  tStat                  pValue       
+                   __________________    _________________    __________________    ____________________
+
+    (Intercept)                   2.4    0.469041575982343      5.11681719253465    0.000103478449252678
+    Group_2                       6.4     0.66332495807108      9.64836302648843    4.50949297058281e-08
+    Group_3                       6.4     0.66332495807108      9.64836302648843    4.50949297058281e-08
+    Group_4        -0.199999999999999     0.66332495807108    -0.301511344577762       0.766908019255224
+
+Number of observations: 20, Error degrees of freedom: 16
+Root Mean Squared Error: 1.05
+R-squared: 0.923,  Adjusted R-Squared: 0.909
+F-statistic vs. constant model: 64, p-value = 3.93e-09
+```
+
+```matlab:Code
+anova(lm)
+```
+
+| |SumSq|DF|MeanSq|F|pValue|
+|:--:|:--:|:--:|:--:|:--:|:--:|
+|1 Group|211.35|3|70.45|64.0454545454546|3.92962246022129e-09|
+|2 Error|17.6|16|1.1|1|0.499999999999999|
+
+When you use the `fitlm` function, you must use what is called "Wilkinson Notation" to specify your model. In this case, \texttt{Data \textasciitilde{} Group} basically means that we have a dependent variable called "Data" that is a function of an independent variable called "Group".
+
+For more information on "Wilkinson Notation", see the Matlab documentation: [https://www.mathworks.com/help/stats/wilkinson-notation.html](https://www.mathworks.com/help/stats/wilkinson-notation.html)
+
+  
 ## 2.9 Setting up an experiment for a two-way ANOVA
   
 
@@ -557,6 +600,48 @@ ans = 6x6
 
 ```
 
+## 2.12.1 Another way to do a two-way ANOVA using `fitlm`
+  
+
+Just like we were also able to do a one-way ANOVA using the `fitlm`/`anova` functions, we can do the same with a two-way ANOVA. Here is an example:
+
+```matlab:Code
+t = table(categorical(stroke_condition), categorical(training_condition), map_data, 'variablenames', {'Stroke', 'Training', 'Data'});
+lm = fitlm(t, 'Data ~ Stroke + Training + Stroke:Training')
+```
+
+```text:Output
+lm = 
+Linear regression model:
+    Data ~ 1 + Stroke*Training
+
+Estimated Coefficients:
+                           Estimate           SE                  tStat                 pValue       
+                           ________    _________________    _________________    ____________________
+
+    (Intercept)              2.4       0.469041575982343     5.11681719253465    0.000103478449252678
+    Stroke_2                 6.4        0.66332495807108     9.64836302648843    4.50949297058281e-08
+    Training_2               6.4        0.66332495807108     9.64836302648843    4.50949297058281e-08
+    Stroke_2:Training_2      -13       0.938083151964687    -13.8580465631147    2.48988725127961e-10
+
+Number of observations: 20, Error degrees of freedom: 16
+Root Mean Squared Error: 1.05
+R-squared: 0.923,  Adjusted R-Squared: 0.909
+F-statistic vs. constant model: 64, p-value = 3.93e-09
+```
+
+```matlab:Code
+anova(lm)
+```
+
+| |SumSq|DF|MeanSq|F|pValue|
+|:--:|:--:|:--:|:--:|:--:|:--:|
+|1 Stroke|0.0500000000000114|1|0.0500000000000114|0.0454545454545558|0.833863249561671|
+|2 Training|0.0500000000000114|1|0.0500000000000114|0.0454545454545558|0.833863249561671|
+|3 Stroke:Training|211.25|1|211.25|192.045454545455|2.48988725127959e-10|
+|4 Error|17.6|16|1.1|1|0.499999999999999|
+
+  
   
 ## 2.13 Writing a two-way ANOVA into your paper
   
