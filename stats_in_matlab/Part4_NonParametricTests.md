@@ -10,6 +10,9 @@
 | Kruskal-Wallis                          | One-way ANOVA              | kruskalwallis           |
 | Friedman                                | 2-way ANOVA or RM-ANOVA    | friedman                |
 
+When you should use a non-parametric test:
+1. If you are dealing with data that is ordinal/categorical, i.e. not continuous numerical data.
+2. If you are dealing with numerical data, but it does not satisfy the conditions of using a parametric test (typically that means the data doesn't fit well with a normal distribution).
   
 ## 4.2 Wilcoxon rank-sum (equivalent to an unpaired t-test)
   
