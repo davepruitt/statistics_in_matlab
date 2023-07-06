@@ -3,17 +3,12 @@
 ## 4.1 Introduction
   
 
-`|               Name of test              | Equivalent parametric test |     Matlab function     |`
-
-`| --------------------------------------- | -------------------------- | ----------------------- |`
-
-`| Mann-Whitney U-test / Wilcoxon rank-sum | Unpaired t-test            | ranksum                 |`
-
-`| Wilcoxon signed-rank                    | Paired t-test              | signrank                |`
-
-`| Kruskal-Wallis                          | One-way ANOVA              | kruskalwallis           |`
-
-`| Friedman                                | 2-way ANOVA or RM-ANOVA    | friedman                |`
+|               Name of test              | Equivalent parametric test |     Matlab function     |
+| --------------------------------------- | -------------------------- | ----------------------- |
+| Mann-Whitney U-test / Wilcoxon rank-sum | Unpaired t-test            | ranksum                 |
+| Wilcoxon signed-rank                    | Paired t-test              | signrank                |
+| Kruskal-Wallis                          | One-way ANOVA              | kruskalwallis           |
+| Friedman                                | 2-way ANOVA or RM-ANOVA    | friedman                |
 
   
 ## 4.2 Wilcoxon rank-sum (equivalent to an unpaired t-test)
