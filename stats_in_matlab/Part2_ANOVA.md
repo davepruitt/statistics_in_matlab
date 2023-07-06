@@ -110,28 +110,30 @@ Okay, now that we have an idea of what our data looks like, let's try performing
 Initially, we will use the `anova1` function to do our one-way ANOVA.
 
 ```matlab:Code
-[p, tbl, stats] = anova1(map_data, groups, 'off')
+[p, tbl, stats] = anova1(map_data, categorical(groups), 'off')
 ```
 
 ```text:Output
-p = 3.9296e-09
+p = 
+      3.92962246022135e-09
+
 ```
 
 | |1|2|3|4|5|6|
 |:--:|:--:|:--:|:--:|:--:|:--:|:--:|
 |1|'Source'|'SS'|'df'|'MS'|'F'|'Prob>F'|
-|2|'Groups'|211.3500|3|70.4500|64.0455|3.9296e-09|
-|3|'Error'|17.6000|16|1.1000|[ ]|[ ]|
-|4|'Total'|228.9500|19|[ ]|[ ]|[ ]|
+|2|'Groups'|211.35|3|70.45|64.0454545454544|3.92962246022135e-09|
+|3|'Error'|17.6|16|1.1|[ ]|[ ]|
+|4|'Total'|228.95|19|[ ]|[ ]|[ ]|
 
 ```text:Output
 stats = 
     gnames: {4x1 cell}
          n: [5 5 5 5]
     source: 'anova1'
-     means: [2.4000 8.8000 8.8000 2.2000]
+     means: [2.4 8.8 8.8 2.2]
         df: 16
-         s: 1.0488
+         s: 1.04880884817015
 
 ```
 
@@ -161,18 +163,18 @@ To use `multcompare`, simply pass it the `stats` variable that we created as an 
 
 ```text:Output
 c = 6x6    
-    1.0000    2.0000   -8.2978   -6.4000   -4.5022    0.0000
-    1.0000    3.0000   -8.2978   -6.4000   -4.5022    0.0000
-    1.0000    4.0000   -1.6978    0.2000    2.0978    0.9901
-    2.0000    3.0000   -1.8978         0    1.8978         0
-    2.0000    4.0000    4.7022    6.6000    8.4978    0.0000
-    3.0000    4.0000    4.7022    6.6000    8.4978    0.0000
+                         1                         2         -8.29778593275269                      -6.4         -4.50221406724731      2.50053448427988e-07
+                         1                         3         -8.29778593275269                      -6.4         -4.50221406724731      2.50053448427988e-07
+                         1                         4         -1.69778593275269                       0.2          2.09778593275269         0.990107559612414
+                         2                         3         -1.89778593275269                         0          1.89778593275269                         0
+                         2                         4          4.70221406724731                       6.6          8.49778593275269       1.6353014835898e-07
+                         3                         4          4.70221406724731                       6.6          8.49778593275269       1.6353014835898e-07
 
 m = 4x2    
-    2.4000    0.4690
-    8.8000    0.4690
-    8.8000    0.4690
-    2.2000    0.4690
+                       2.4         0.469041575982343
+                       8.8         0.469041575982343
+                       8.8         0.469041575982343
+                       2.2         0.469041575982343
 
 ```
 
@@ -202,18 +204,18 @@ The `multcompare` function does a **Tukey-Kramer** post-hoc test by default. If 
 
 ```text:Output
 c = 6x6    
-    1.0000    2.0000   -8.3955   -6.4000   -4.4045    0.0000
-    1.0000    3.0000   -8.3955   -6.4000   -4.4045    0.0000
-    1.0000    4.0000   -1.7955    0.2000    2.1955    1.0000
-    2.0000    3.0000   -1.9955         0    1.9955    1.0000
-    2.0000    4.0000    4.6045    6.6000    8.5955    0.0000
-    3.0000    4.0000    4.6045    6.6000    8.5955    0.0000
+                         1                         2         -8.39550292497842                      -6.4         -4.40449707502158      2.70569578234971e-07
+                         1                         3         -8.39550292497842                      -6.4         -4.40449707502158      2.70569578234971e-07
+                         1                         4         -1.79550292497842                       0.2          2.19550292497842                         1
+                         2                         3         -1.99550292497842                         0          1.99550292497842                         1
+                         2                         4          4.60449707502158                       6.6          8.59550292497842      1.76739392410571e-07
+                         3                         4          4.60449707502158                       6.6          8.59550292497842      1.76739392410571e-07
 
 m = 4x2    
-    2.4000    0.4690
-    8.8000    0.4690
-    8.8000    0.4690
-    2.2000    0.4690
+                       2.4         0.469041575982343
+                       8.8         0.469041575982343
+                       8.8         0.469041575982343
+                       2.2         0.469041575982343
 
 ```
 
@@ -234,8 +236,12 @@ bonferroni_corrected_alpha = normal_alpha / total_pairwise_comparisons;
 ```
 
 ```text:Output
-h = 1
-p = 3.4591e-05
+h = 
+     1
+
+p = 
+      3.45913402691634e-05
+
 ```
 
 ```matlab:Code
@@ -243,8 +249,12 @@ p = 3.4591e-05
 ```
 
 ```text:Output
-h = 1
-p = 7.7685e-06
+h = 
+     1
+
+p = 
+      7.76846156806427e-06
+
 ```
 
 ```matlab:Code
@@ -252,8 +262,12 @@ p = 7.7685e-06
 ```
 
 ```text:Output
-h = 0
-p = 0.7599
+h = 
+     0
+
+p = 
+         0.759922968348739
+
 ```
 
 ```matlab:Code
@@ -261,8 +275,12 @@ p = 0.7599
 ```
 
 ```text:Output
-h = 0
-p = 1
+h = 
+     0
+
+p = 
+     1
+
 ```
 
 ```matlab:Code
@@ -270,8 +288,12 @@ p = 1
 ```
 
 ```text:Output
-h = 1
-p = 1.2180e-05
+h = 
+     1
+
+p = 
+      1.21801296396594e-05
+
 ```
 
 ```matlab:Code
@@ -279,8 +301,12 @@ p = 1.2180e-05
 ```
 
 ```text:Output
-h = 1
-p = 1.5961e-06
+h = 
+     1
+
+p = 
+      1.59612290825995e-06
+
 ```
 
   
@@ -306,7 +332,7 @@ Here is an example:
 ```matlab:Code
 %Perform the one-way ANVOA
 dependent_variable = map_data;
-independent_variables = {groups};
+independent_variables = {categorical(groups)};
 [p, tbl, stats] = anovan(dependent_variable, independent_variables, 'display', 'off', 'model', 'full', 'varnames', {'Group'});
 tbl
 ```
@@ -314,9 +340,9 @@ tbl
 | |1|2|3|4|5|6|7|
 |:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
 |1|'Source'|'Sum Sq.'|'d.f.'|'Singular?'|'Mean Sq.'|'F'|'Prob>F'|
-|2|'Group'|211.3500|3|0|70.4500|64.0455|3.9296e-09|
-|3|'Error'|17.6000|16|0|1.1000|[ ]|[ ]|
-|4|'Total'|228.9500|19|0|[ ]|[ ]|[ ]|
+|2|'Group'|211.35|3|0|70.45|64.0454545454548|3.92962246022119e-09|
+|3|'Error'|17.5999999999999|16|0|1.1|[ ]|[ ]|
+|4|'Total'|228.95|19|0|[ ]|[ ]|[ ]|
 
 You will notice that we get the exact same result as we did with `anova1`. But using this function allows us more flexibility just in case we don't have the same number of subjects in each group.
 
@@ -440,11 +466,11 @@ tbl
 | |1|2|3|4|5|6|
 |:--:|:--:|:--:|:--:|:--:|:--:|:--:|
 |1|'Source'|'SS'|'df'|'MS'|'F'|'Prob>F'|
-|2|'Columns'|0.0500|1|0.0500|0.0455|0.8339|
-|3|'Rows'|0.0500|1|0.0500|0.0455|0.8339|
-|4|'Interaction'|211.2500|1|211.2500|192.0455|2.4899e-10|
-|5|'Error'|17.6000|16|1.1000|[ ]|[ ]|
-|6|'Total'|228.9500|19|[ ]|[ ]|[ ]|
+|2|'Columns'|0.0500000000000005|1|0.0500000000000005|0.0454545454545462|0.833863249561689|
+|3|'Rows'|0.0500000000000005|1|0.0500000000000005|0.0454545454545462|0.833863249561689|
+|4|'Interaction'|211.25|1|211.25|192.045454545455|2.48988725127952e-10|
+|5|'Error'|17.5999999999999|16|1.09999999999999|[ ]|[ ]|
+|6|'Total'|228.95|19|[ ]|[ ]|[ ]|
 
   
 ## 2.11 Performing a two-way ANOVA using `anovan`
@@ -464,7 +490,7 @@ Now let's set up the ANOVA and run it:
 
 ```matlab:Code
 dependent_variable = map_data;
-independent_variables = {stroke_condition training_condition};
+independent_variables = {categorical(stroke_condition) categorical(training_condition)};
 [p, tbl, stats] = anovan(dependent_variable, independent_variables, 'display', 'off', 'model', 'full', 'varnames', {'Stroke', 'Training'});
 tbl
 ```
@@ -472,11 +498,11 @@ tbl
 | |1|2|3|4|5|6|7|
 |:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
 |1|'Source'|'Sum Sq.'|'d.f.'|'Singular?'|'Mean Sq.'|'F'|'Prob>F'|
-|2|'Stroke'|0.0500|1|0|0.0500|0.0455|0.8339|
-|3|'Training'|0.0500|1|0|0.0500|0.0455|0.8339|
-|4|'Stroke*Training'|211.2500|1|0|211.2500|192.0455|2.4899e-10|
-|5|'Error'|17.6000|16|0|1.1000|[ ]|[ ]|
-|6|'Total'|228.9500|19|0|[ ]|[ ]|[ ]|
+|2|'Stroke'|0.0500000000000398|1|0|0.0500000000000398|0.0454545454545816|0.833863249561625|
+|3|'Training'|0.0500000000000398|1|0|0.0500000000000398|0.0454545454545816|0.833863249561625|
+|4|'Stroke*Training'|211.25|1|0|211.25|192.045454545455|2.48988725127959e-10|
+|5|'Error'|17.6|16|0|1.1|[ ]|[ ]|
+|6|'Total'|228.95|19|0|[ ]|[ ]|[ ]|
 
 In my opinion, this is a much clearer way to set up your data and organize your code than that weird way `anova2` expects. The results of the two functions are equivalent, and the `anovan` function also supports unbalanced designs, which is highly likely to occur in your own experiments.
 
@@ -502,12 +528,12 @@ multcompare(stats, 'dim', 1:2)
 
 ```text:Output
 ans = 6x6    
-    1.0000    2.0000   -8.2978   -6.4000   -4.5022    0.0000
-    1.0000    3.0000   -8.2978   -6.4000   -4.5022    0.0000
-    1.0000    4.0000   -1.6978    0.2000    2.0978    0.9901
-    2.0000    3.0000   -1.8978         0    1.8978         0
-    2.0000    4.0000    4.7022    6.6000    8.4978    0.0000
-    3.0000    4.0000    4.7022    6.6000    8.4978    0.0000
+                         1                         2         -8.29778593275269                      -6.4         -4.50221406724731      2.50053448427987e-07
+                         1                         3         -8.29778593275269                      -6.4         -4.50221406724731      2.50053448427982e-07
+                         1                         4         -1.69778593275269         0.200000000000002          2.09778593275269         0.990107559612414
+                         2                         3         -1.89778593275269                         0          1.89778593275269                         0
+                         2                         4          4.70221406724731                       6.6          8.49778593275269      1.63530148358979e-07
+                         3                         4          4.70221406724731                       6.6          8.49778593275269      1.63530148358979e-07
 
 ```
 
@@ -623,8 +649,8 @@ ranova_tbl = ranova(rm)
 
 | |SumSq|DF|MeanSq|F|pValue|pValueGG|pValueHF|pValueLB|
 |:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
-|1 (Intercept):Time|1.1136e+04|6|1.8560e+03|41.7040|0|0|0|0.0030|
-|2 Error(Time)|1.0681e+03|24|44.5048|1|0.5000|0.5000|0.5000|0.5000|
+|1 (Intercept):Time|11136.1714285714|6|1856.02857142857|41.7040445110207|1.55295063914507e-11|8.32299596657341e-06|1.55295063914507e-11|0.00296055957971663|
+|2 Error(Time)|1068.11428571429|24|44.5047619047619|1|0.5|0.5|0.5|0.5|
 
 **Writing this up in a paper:** "A repeated-measures ANOVA revealed that there was a significant effect on motor task performance in the VNS group throughout the post-lesion therapy period (F(6, 24) = 41.7, p = 1.55x10^-11)."
 
@@ -659,7 +685,7 @@ d(:, 1) = [];
 
 %Create a table to pass to the fitrm function, because fitrm requires that
 %data be in table format
-t = table(groups, d(:, 1), d(:, 2), d(:, 3), d(:, 4), d(:, 5), d(:, 6), d(:, 7), 'VariableNames', {'Group', 'Post', 'Wk1', 'Wk2', 'Wk3', 'Wk4', 'Wk5', 'Wk6'});
+t = table(categorical(groups), d(:, 1), d(:, 2), d(:, 3), d(:, 4), d(:, 5), d(:, 6), d(:, 7), 'VariableNames', {'Group', 'Post', 'Wk1', 'Wk2', 'Wk3', 'Wk4', 'Wk5', 'Wk6'});
 timepoints = 1:size(d, 2);
 
 %Execute the fitrm function to fit our data to a repeated-measure model
@@ -671,9 +697,9 @@ ranova_tbl = ranova(rm)
 
 | |SumSq|DF|MeanSq|F|pValue|pValueGG|pValueHF|pValueLB|
 |:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
-|1 (Intercept):Time|4.8202e+03|6|803.3695|18.1890|0|0|0|0.0027|
-|2 Group:Time|1.2918e+03|6|215.2952|4.8745|0.0006|0.0031|0.0006|0.0583|
-|3 Error(Time)|2.1201e+03|48|44.1679|1|0.5000|0.5000|0.5000|0.5000|
+|1 (Intercept):Time|13182.7428571428|6|2197.12380952381|49.7448586291474|6.1063125679625e-19|1.2333538312513e-13|6.1063125679625e-19|0.000106850401880606|
+|2 Group:Time|1291.77142857143|6|215.295238095238|4.87447777687932|0.00058300917254001|0.00312371427280702|0.00058300917254001|0.0582786489967249|
+|3 Error(Time)|2120.05714285714|48|44.1678571428571|1|0.5|0.5|0.5|0.5|
 
 ```matlab:Code
 
@@ -683,9 +709,9 @@ anova_tbl = anova(rm)
 
 | |Within|Between|SumSq|DF|MeanSq|F|pValue|
 |:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
-|1|Constant|constant|5.2186e+04|1|5.2186e+04|1.6363e+03|0|
-|2|Constant|Group|7.0802e+03|1|7.0802e+03|222.0004|0|
-|3|Constant|Error|255.1429|8|31.8929|1|0.5000|
+|1|Constant|constant|220866.057142771|1|220866.057142771|6925.25151175541|4.84920726250624e-13|
+|2|Constant|Group|7080.22857142856|1|7080.22857142856|222.00044792833|4.0591661950167e-07|
+|3|Constant|Error|255.142857142858|8|31.8928571428572|1|0.5|
 
 **How would you report this in a paper?**
 
