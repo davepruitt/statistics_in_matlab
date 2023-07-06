@@ -150,6 +150,26 @@ So in the paper, you may want to write something like this:
 *"A one-way ANOVA revealed a significant effect of VNS intensity on jaw motor map area (F(3, 16) = 64.05, p = 3.92x10^-9)."*
 
   
+## 2.4.1 A brief interlude - categorical variables
+  
+
+When doing an ANOVA in Matlab, you pass the anova function your independent variable(s) (the group assignments) as well as the dependent variables (your experimental data). Make sure you correctly identify them as *continuous* or *categorical* variables.
+
+By default, Matlab treats everything as numerical/continuous data. So in the following code, `groups` would be treated as a continuous variable:
+
+```matlab:Code
+[p, tbl, stats] = anova1(map_data, groups, 'off');
+```
+
+If we want to make sure `groups` is treated as a categorical variable, we need to do the following:
+
+```matlab:Code
+[p, tbl, stats] = anova1(map_data, categorical(groups), 'off');
+```
+
+Sometimes making this distinction between "continuous" and "categorical" won't actually affect the results of your ANOVA, but at other times it certainly could. So make sure to use the proper type for your variables.
+
+  
 ## 2.5 Post-hoc tests using `multcompare`
   
 
