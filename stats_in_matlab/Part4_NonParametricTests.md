@@ -75,13 +75,13 @@ h =
 ## 4.4 Kruskal-Wallis (equivalent to a 1-way ANOVA)
   
 
-Usage of the function `kruskalwallis` is identical to the usage of `anova1` in Matlab, and thus it also comes with the same limitations of `anova1` (you must have a balanced design to use `kruskalwallis`).
+Usage of the function `kruskalwallis` is identical to the usage of `anova1` in Matlab, however, unliked `anova1`, it *does allow unequal group sizes*. You *do not* have to have a balanced design to use the `kruskalwallis` function.
 
 Example:
 
 ```matlab:Code
-map_data = [1 2 3 2 4 8 9 7 10 10 8 8 9 9 10 1 3 3 2 2]';
-groups = [1 1 1 1 1 2 2 2 2 2 3 3 3 3 3 4 4 4 4 4]';
+map_data = [1 2 3 2 4 8 9 7 10 10 8 8 9 9 10 1 3 3 2 2 2]';
+groups = [1 1 1 1 1 2 2 2 2 2 3 3 3 3 3 4 4 4 4 4 4]';
 
 [p, tbl, stats] = kruskalwallis(map_data, groups, 'off')
 ```
@@ -156,3 +156,10 @@ stats =
         sigma: 1.81659021245849
 
 ```
+
+  
+
+If you have an unbalanced design, and you need to do a Friedman test, you are out of luck. Matlab does not have an appropriate built-in function. However, there are some third party alternatives:
+
+   1.  The Skillings-Mack test is considered an acceptable non-parametric replacement. There is a third-party function available at this link: [https://github.com/thomaspingel/mackskill-matlab](https://github.com/thomaspingel/mackskill-matlab) 
+   1.  You may also be interested in the Durbin test: [https://www.mathworks.com/matlabcentral/fileexchange/26972-durbin-test](https://www.mathworks.com/matlabcentral/fileexchange/26972-durbin-test)
